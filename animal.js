@@ -1,5 +1,6 @@
 // Question
-// You have been invited and hired by your school's biological and life sciences faculty to use JavaScript to model a simple Classification for Kingdom Animalia.
+// You have been invited and hired by your school's biological and life sciences faculty to use JavaScript
+// to model a simple Classification for Kingdom Animalia.
 
 // without backbone
     // Arthropoda - cold blooded
@@ -12,21 +13,27 @@
     // Mammals - warm blooded
 
 
+// ANIMAL KINGDOM CLASS
+
 class Animal {
-    constructor(coldBlooded, withBackbone) {
+    constructor(coldBlooded, withBackbone, animalClass) {
+        // Abstraction:
+        if (new.target === Animal) {
+            throw new Error("Abstract class cannot be instantiated");
+        }
+        // Encapsulation (private properties):
         this._coldBlooded = coldBlooded;
         this._withBackbone = withBackbone;
-    }
-
-    get coldBlooded() {
-        return this._coldBlooded;
-    }
-
-    get withBackbone() {
-        return this._withBackbone;
+        this._animalClass = animalClass;
     }
 
     // Abstraction
+    getColdBlooded() {
+        throw new Error("Abstract method 'sound' must be implemented");
+    }
+    getWithBackbone() {
+        throw new Error("Abstract method 'sound' must be implemented");
+    }
     sound() {
         throw new Error("Abstract method 'sound' must be implemented");
     }
@@ -37,134 +44,185 @@ class Animal {
     }
 }
 
+
+// Below are child classes using Inheritance
+
 class Arthropoda extends Animal {
     constructor() {
-        // Arthropoda are cold-blooded and have no backbone
-        super(true, false);
+        super("Cold blooded animals", "Have no backbone");
+        this.animalClass = "Arthropoda";
     }
-
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Arthropoda makes clicking sounds.");
+    }
+    
     // Polymorphism
     move() {
         console.log("Arthropoda is crawling.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Arthropoda makes clicking sounds.");
-    }
 }
+
 
 class Fish extends Animal {
     constructor() {
-        // Fish are cold-blooded and have a backbone
-        super(true, true);
+        super("Cold blooded animals", "Have backbone");
+        this.animalClass = "Fish";
+    }
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Fish makes bubbling sounds.");
     }
 
     // Polymorphism
     move() {
         console.log("Fish is swimming.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Fish makes bubbling sounds.");
-    }
 }
+
 
 class Amphibia extends Animal {
     constructor() {
-        // Amphibia are cold-blooded and have a backbone
-        super(true, true);
+        super("Cold blooded animals", "Have backbone");
+        this.animalClass = "Amphibia";
+    }
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Amphibia makes croaking sounds.");
     }
 
     // Polymorphism
     move() {
         console.log("Amphibia is hopping or swimming.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Amphibia makes croaking sounds.");
-    }
 }
+
 
 class Reptiles extends Animal {
     constructor() {
-        // Reptiles are cold-blooded and have a backbone
-        super(true, true);
+        super("Cold blooded animals", "Have backbone");
+        this.animalClass = "Reptiles";
+    }
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Reptile hisses or growls.");
     }
 
     // Polymorphism
     move() {
         console.log("Reptile is crawling or slithering.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Reptile hisses or growls.");
-    }
 }
+
 
 class Aves extends Animal {
     constructor() {
-        // Aves are warm-blooded and have a backbone
-        super(false, true);
+        super("Warm blooded animals", "Have backbone");
+        this.animalClass = "Aves";
+    }
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Bird sings or chirps.");
     }
 
     // Polymorphism
     move() {
         console.log("Bird is flying.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Bird sings or chirps.");
-    }
 }
+
 
 class Mammals extends Animal {
     constructor() {
-        // Mammals are warm-blooded and have a backbone
-        super(false, true);
+        super("Warm blooded animals", "Have backbone");
+        this.animalClass = "Mammals";
+    }
+    
+    // Abstraction
+    getColdBlooded() {
+        return this._coldBlooded;
+    }
+    getWithBackbone() {
+        return this._withBackbone;
+    }
+    sound() {
+        console.log("Mammal makes various sounds.");
     }
 
     // Polymorphism
     move() {
         console.log("Mammal is walking or running.");
     }
-
-    // Abstraction
-    sound() {
-        console.log("Mammal makes various sounds.");
-    }
 }
 
+
 // Example usage
-const arthropoda = new Arthropoda();
-const fish = new Fish();
-const amphibian = new Amphibia();
-const reptile = new Reptiles();
-const bird = new Aves();
-const mammal = new Mammals();
+const spiders = new Arthropoda();
+const salmons = new Fish();
+const frogs = new Amphibia();
+const turtles = new Reptiles();
+const eagles = new Aves();
+const elephants = new Mammals();
+   
 
-console.log(arthropoda.coldBlooded, arthropoda.withBackbone); 
-console.log(fish.coldBlooded, fish.withBackbone);             
-console.log(amphibian.coldBlooded, amphibian.withBackbone);   
-console.log(reptile.coldBlooded, reptile.withBackbone);       
-console.log(bird.coldBlooded, bird.withBackbone);             
-console.log(mammal.coldBlooded, mammal.withBackbone);         
+console.log(`Spiders (${spiders.animalClass}): ${spiders.getColdBlooded()} and ${spiders.getWithBackbone()}`);
+console.log(`Salmons (${salmons.animalClass}): ${salmons.getColdBlooded()} and ${salmons.getWithBackbone()}`);
+console.log(`Frogs (${frogs.animalClass}): ${frogs.getColdBlooded()} and ${frogs.getWithBackbone()}`);
+console.log(`Turtles (${turtles.animalClass}): ${turtles.getColdBlooded()} and ${turtles.getWithBackbone()}`);
+console.log(`Eagles (${eagles.animalClass}): ${eagles.getColdBlooded()} and ${eagles.getWithBackbone()}`);
+console.log(`Elephants (${elephants.animalClass}): ${elephants.getColdBlooded()} and ${elephants.getWithBackbone()}`);
 
-arthropoda.move();
-fish.move();
-amphibian.move();
-reptile.move();
-bird.move();
-mammal.move();
 
-arthropoda.sound();
-fish.sound();
-amphibian.sound();
-reptile.sound();
-bird.sound();
-mammal.sound();
-    
+// Calling move and sound methods:
+spiders.move();
+spiders.sound();
+
+salmons.move();
+salmons.sound();
+
+frogs.move();
+frogs.sound();
+
+turtles.move();
+turtles.sound();
+
+eagles.move();
+eagles.sound();
+
+elephants.move();
+elephants.sound();
